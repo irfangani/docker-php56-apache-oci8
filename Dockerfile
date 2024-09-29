@@ -33,7 +33,10 @@ RUN tar -xzf /tmp/oci8-2.0.12.tgz -C /tmp/ && \
 
 RUN echo "export LD_LIBRARY_PATH=$ORACLE_HOME/instantclient_12_2" >> /etc/apache2/envvars && \
     echo "export ORACLE_HOME=$ORACLE_HOME/instantclient_12_2" >> /etc/apache2/envvars && \
-    echo "LD_LIBRARY_PATH=$ORACLE_HOME/instantclient_12_2:$LD_LIBRARY_PATH" >> /etc/environment 
+    echo "LD_LIBRARY_PATH=$ORACLE_HOME/instantclient_12_2:$LD_LIBRARY_PATH" >> /etc/environment
+
+# Install comopser
+COPY --from=composer/composer:2.2-bin /composer /usr/bin/composer
 
 # Enable mod_rewrite
 RUN a2enmod rewrite
